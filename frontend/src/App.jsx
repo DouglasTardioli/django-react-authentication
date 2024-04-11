@@ -1,12 +1,41 @@
 import react from "react"
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
+import Login from "./pages/Login"
+import Register from "./pages/Register"
+import Home from "./pages/Home"
+import NotFound from "./pages/NotFound"
+import ProtectedRoute from "./components/ProtectedRoute"
+
+function Logout() {
+  localStorage.clear()
+  return <Navigate to="/login" />
+}
+
+function RegisterAndLogout() {
+  localStorage.clear()
+  return <Register />
+}
 
 function App() {
-
-
   return (
-    <main className="w-screen h-screen bg-slate-950">
-      <h1 className="text-zinc-50">Hellooo</h1>
-    </main>
+    <div className="w-screen h-screen text-zinc-100"> 
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<Logout />} />
+          <Route path="/register" element={<RegisterAndLogout />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   )
 }
 
