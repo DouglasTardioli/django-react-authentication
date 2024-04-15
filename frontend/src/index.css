@@ -10,3 +10,7 @@ body {
     background-color: rgb(39 39 42 / var(--tw-bg-opacity));
     overflow-x: hidden;
 }
+
+::-ms-reveal {
+    filter: invert(100%);
+}
